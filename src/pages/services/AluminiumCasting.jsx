@@ -18,6 +18,11 @@ const gallery = [
   { src: "/src/components/images/3.jpg",         caption: "CNC Machining Centre" },
   { src: "/src/components/images/4.jpg",         caption: "Pattern & Tooling" },
   { src: "/src/components/images/5.jpg",         caption: "Finished Castings" },
+  { src: "/src/components/images/8.png",         caption: "Aluminium Casting Unit" },
+  { src: "/src/components/images/9.png",         caption: "Machined Aluminium Components" },
+  { src: "/src/components/images/HPDC.png",      caption: "HPDC Process" },
+  { src: "/src/components/images/GDC.png",       caption: "GDC Process" },
+  { src: "/src/components/images/sandcasting.png", caption: "Sand Casting Process" },
 ];
 
 /* ── Casting process data ─────────────────────────────────────── */
@@ -33,7 +38,7 @@ const processes = [
   },
   {
     step: "02",
-    title: "Gravity Die Casting",
+    title: "Gravity Die Casting  |  Gravity Die Casting with Pressure Tightening",
     short: "GDC",
     desc: "Aluminium poured into reusable permanent moulds by gravity — producing dense, high-integrity castings for structural and load-bearing applications.",
     tags: ["Structural Parts", "Dense Castings", "Reusable Moulds"],
@@ -42,8 +47,8 @@ const processes = [
   },
   {
     step: "03",
-    title: "Sand Casting",
-    short: "Sand",
+    title: "Sand Casting | Intricate Sand Casting with Pressure Tightening",
+    short: "Sand Casting",
     desc: "Flexible, cost-effective route for complex geometries and low-to-medium volumes — ideal for prototypes, one-offs, and custom engineering parts.",
     tags: ["Complex Geometry", "Prototypes", "Low Volume"],
     Icon: Settings2,
@@ -61,8 +66,8 @@ const processes = [
 ];
 
 const capabilities = [
-  "64+ Aluminium Alloy Grades (LM, EN, ASTM series)",
   "In-house VMC & CNC turning machining",
+  "64+ Aluminium Alloy Grades (LM, EN, ASTM series)",
   "First Article Inspection (FAI) on every new tool",
   "Dimensional inspection on all production batches",
   "Material traceability and heat number records",
@@ -70,6 +75,7 @@ const capabilities = [
   "Export-ready packaging and logistics support",
   "Custom alloy selection advisory",
 ];
+const HIGHLIGHT_CAPABILITY = "In-house VMC & CNC turning machining";
 
 const stats = [
   { to: 35,  suffix: "+", label: "Years Experience"  },
@@ -319,7 +325,7 @@ export default function AluminiumCasting() {
                 {[
                   "35+ years of casting expertise",
                   "64+ aluminium alloy grades",
-                  "Casting weight range: 50g to 50kg",
+                  "HPDC, GDC and Sand Casting",
                   "In-house machining for ready-to-assemble parts",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-[14px] text-steel-800">
@@ -327,6 +333,12 @@ export default function AluminiumCasting() {
                     {item}
                   </li>
                 ))}
+                <li className="flex items-center gap-3 text-[14px] text-steel-800">
+                  <CheckCircle2 size={16} className="text-brand-400 shrink-0" strokeWidth={2.5} />
+                  <span>
+                    Casting weight range: <strong>25g</strong> to <strong>230kg</strong>
+                  </span>
+                </li>
               </motion.ul>
 
               <motion.div {...fadeUp(0.26)}>
@@ -469,8 +481,16 @@ export default function AluminiumCasting() {
                     transition={{ duration: 0.4, delay: 0.04 + i * 0.06 }}
                     className="flex items-start gap-3 text-[14px] text-steel-800 leading-relaxed"
                   >
-                    <CheckCircle2 size={16} className="text-brand-400 shrink-0 mt-0.5" strokeWidth={2.5} />
-                    {item}
+                    {item === HIGHLIGHT_CAPABILITY ? (
+                      <span className="inline-flex items-center rounded-md bg-brand-500/12 border border-brand-500/30 px-2 py-1 font-semibold text-brand-700">
+                        {item}
+                      </span>
+                    ) : (
+                      <>
+                        <CheckCircle2 size={16} className="text-brand-400 shrink-0 mt-0.5" strokeWidth={2.5} />
+                        <span>{item}</span>
+                      </>
+                    )}
                   </motion.li>
                 ))}
               </ul>

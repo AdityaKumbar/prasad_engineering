@@ -70,7 +70,7 @@ const specs = [
   { label: "Rubber Grades",      value: "Multiple" },
   { label: "Hardness Range",     value: "30–90 ShA" },
   { label: "Max Temp (silicone)", value: "200°C" },
-  { label: "Supply QC",          value: "ISO Aligned" },
+  { label: "End-to-end production control",          value: "In-House Manufacturing" },
 ];
 
 const fadeUp = (delay = 0) => ({
@@ -502,7 +502,7 @@ export default function Rubber() {
                 { label: "Fewer Suppliers", value: "1 Source" },
                 { label: "Rubber Grades",   value: "Multiple" },
                 { label: "Custom Profiles", value: "Per Drawing" },
-                { label: "ISO Compliant",   value: "All Batches" },
+                { label: "Consistent Quality",   value: "All Batches" },
               ].map(({ label, value }) => (
                 <motion.div key={label}
                   whileHover={{ y: -3, scale: 1.02 }}

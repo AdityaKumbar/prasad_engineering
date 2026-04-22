@@ -1,5 +1,7 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, ArrowUpRight, Shield } from "lucide-react";
+
+const MAPS_URL = "https://maps.app.goo.gl/hB5vZQj7y3e6vuqW9";
 
 const footerLinks = {
   Company: [
@@ -12,10 +14,6 @@ const footerLinks = {
     { label: "Aluminium Casting", to: "/services/aluminium-casting" },
     { label: "Rubber Industry Services", to: "/services/rubber" },
     { label: "Industries We Serve", to: "/industries" },
-  ],
-  Connect: [
-    { label: "Contact Us", to: "/contact" },
-    { label: "Get a Quote", to: "/contact" },
   ],
 };
 
@@ -48,39 +46,6 @@ export default function Footer() {
               Precision aluminium casting and rubber component manufacturing from Belagavi.
               Trusted by 916+ companies across India for 35+ years.
             </p>
-            <ul className="space-y-2 pt-2">
-              <li className="flex items-start gap-2 text-sm text-steel-400">
-                <MapPin size={15} className="text-brand-400 mt-0.5 shrink-0" />
-                Plot No. 9/A, BEMCIEL Industrial Estate, Udyambag, Belagavi - 590008, Karnataka, India
-              </li>
-              <li>
-                <a
-                  href="tel:+917204339500"
-                  className="flex items-center gap-2 text-sm text-steel-400 hover:text-brand-400 transition-colors"
-                >
-                  <Phone size={15} className="text-brand-400" />
-                  +91 72043 39500 / +91 94484 80832
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:prasad.engineering@rediffmail.com"
-                  className="flex items-center gap-2 text-sm text-steel-400 hover:text-brand-400 transition-colors"
-                >
-                  <Mail size={15} className="text-brand-400" />
-                  prasad.engineering@rediffmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:prasad.engineering.15official@gmail.com"
-                  className="flex items-center gap-2 text-sm text-steel-400 hover:text-brand-400 transition-colors"
-                >
-                  <Mail size={15} className="text-brand-400" />
-                  prasad.engineering.15official@gmail.com
-                </a>
-              </li>
-            </ul>
             <p className="text-xs text-steel-500 mt-1">GSTIN: 29AACFP1265C2ZH</p>
             <div className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 rounded-full border border-brand-500/30 bg-brand-500/10 text-xs text-brand-300">
               <Shield size={13} />
@@ -109,6 +74,66 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+
+          <div>
+            <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-steel-400 mb-4">Contact</h4>
+            <ul className="space-y-2.5">
+              <li className="flex items-start gap-2 text-sm text-steel-400">
+                <MapPin size={15} className="text-brand-400 mt-0.5 shrink-0" />
+                <a
+                  href={MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-brand-400 transition-colors"
+                >
+                  Plot No. 9/A, BEMCIEL Industrial Estate, Udyambag, Belagavi - 590008, Karnataka, India
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+917204339500"
+                  className="flex items-center gap-2 text-sm text-steel-400 hover:text-brand-400 transition-colors"
+                >
+                  <Phone size={15} className="text-brand-400" />
+                  +91 72043 39500
+                </a>
+                <a
+                  href="tel:+919448480832"
+                  className="flex items-center gap-2 text-sm text-steel-400 hover:text-brand-400 transition-colors"
+                >
+                  <Phone size={15} className="text-brand-400" />
+                  +91 94484 80832
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:prasad.engineering@rediffmail.com"
+                  className="flex items-center gap-2 text-sm text-steel-400 hover:text-brand-400 transition-colors"
+                >
+                  <Mail size={16} strokeWidth={2.2} className="text-brand-400 shrink-0" />
+                  prasad.engineering@rediffmail.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:prasad.engineering.15official@gmail.com"
+                  className="flex items-center gap-2 text-sm text-steel-400 hover:text-brand-400 transition-colors"
+                >
+                  <Mail size={16} strokeWidth={2.2} className="text-brand-400 shrink-0" />
+                  prasad.engineering.15official@gmail.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:prasad.engineeringa@gmail.com"
+                  className="flex items-center gap-2 text-sm text-steel-400 hover:text-brand-400 transition-colors"
+                >
+                  <Mail size={16} strokeWidth={2.2} className="text-brand-400 shrink-0" />
+                  prasad.engineeringa@gmail.com
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 

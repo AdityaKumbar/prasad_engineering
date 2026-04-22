@@ -3,17 +3,20 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2 } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 
+const MAPS_URL = "https://maps.app.goo.gl/hB5vZQj7y3e6vuqW9";
+
 const contactInfo = [
   {
     Icon: MapPin,
     label: "Address",
-    value: "Plot No. 9/A, BEMCIEL Industrial Estate, Udyambag, Belagavi - 590008",
+    value: "Plot No. 9/A, BEMCIEL Industrial Estate, Udyambag , Belagavi - 590008",
     sub: "Karnataka, India",
   },
   {
     Icon: Phone,
     label: "Phone",
-    value: "+91 72043 39500 / +91 94484 80832",
+    value: "+91 72043 39500 ",
+    value2: "+91 94484 80832",
     sub: "Mon-Sat, 9:00 AM - 6:00 PM",
   },
   {
@@ -21,6 +24,7 @@ const contactInfo = [
     label: "Email",
     value: "prasad.engineering@rediffmail.com",
     value2: "prasad.engineering.15official@gmail.com",
+    value3: "prasad.enginneringa@gmail.com",
     sub: "We respond within 24 hours",
   },
   {
@@ -101,7 +105,7 @@ export default function Contact() {
                 </p>
               </motion.div>
 
-              {contactInfo.map(({ Icon, label, value, value2, sub, isGstin }, i) => (
+              {contactInfo.map(({ Icon, label, value, value2, value3, sub, isGstin }, i) => (
                 <motion.div
                   key={label}
                   initial={{ opacity: 0, x: -20 }}
@@ -117,8 +121,65 @@ export default function Contact() {
                     <p className="text-[11px] text-steel-500 uppercase tracking-widest font-semibold mb-0.5">
                       {label}
                     </p>
-                    <p className="text-[15px] font-semibold text-steel-900 break-all">{value}</p>
-                    {value2 && <p className="text-[14px] font-semibold text-steel-900 break-all mt-0.5">{value2}</p>}
+                    {label === "Email" ? (
+                      <>
+                        <a
+                          href={`mailto:${value}`}
+                          className="block text-[15px] font-semibold text-steel-900 break-all hover:text-brand-500 transition-colors"
+                        >
+                          {value}
+                        </a>
+                        {value2 && (
+                          <a
+                            href={`mailto:${value2}`}
+                            className="block text-[14px] font-semibold text-steel-900 break-all mt-0.5 hover:text-brand-500 transition-colors"
+                          >
+                            {value2}
+                          </a>
+                        )}
+                        {value3 && (
+                          <a
+                            href={`mailto:${value3}`}
+                            className="block text-[14px] font-semibold text-steel-900 break-all mt-0.5 hover:text-brand-500 transition-colors"
+                          >
+                            {value3}
+                          </a>
+                        )}
+                      </>
+                    ) : label === "Phone" ? (
+                      <>
+                        <a
+                          href={`tel:${value.replace(/\s+/g, "")}`}
+                          className="block text-[15px] font-semibold text-steel-900 break-all hover:text-brand-500 transition-colors"
+                        >
+                          {value}
+                        </a>
+                        {value2 && (
+                          <a
+                            href={`tel:${value2.replace(/\s+/g, "")}`}
+                            className="block text-[14px] font-semibold text-steel-900 break-all mt-0.5 hover:text-brand-500 transition-colors"
+                          >
+                            {value2}
+                          </a>
+                        )}
+                      </>
+                    ) : label === "Address" ? (
+                      <a
+                        href={MAPS_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-[15px] font-semibold text-steel-900 break-all hover:text-brand-500 transition-colors"
+                      >
+                        {value.replace(", Belagavi - 590008", ",")}
+                        <br />
+                        Belagavi - 590008
+                      </a>
+                    ) : (
+                      <>
+                        <p className="text-[15px] font-semibold text-steel-900 break-all">{value}</p>
+                        {value2 && <p className="text-[14px] font-semibold text-steel-900 break-all mt-0.5">{value2}</p>}
+                      </>
+                    )}
                     <p className="text-[12px] text-steel-600 mt-0.5">{sub}</p>
                   </div>
                 </motion.div>
@@ -266,7 +327,34 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      <section className="bg-white section-transition">
+        <div className="container-max section-padding pb-20 lg:pb-28">
+          <div className="rounded-2xl border border-steel-200/90 bg-white p-4 sm:p-6 shadow-sm">
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-steel-900">
+                Find Us On Map
+              </h2>
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-brand-500 hover:text-brand-600 transition-colors"
+              >
+                Open in Google Maps
+              </a>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.773002737117!2d74.48955097471051!3d15.821995984822285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf65d3dd5f8a6f%3A0xa898e78652c454ed!2sPrasad%20Engineering!5e1!3m2!1sen!2sin!4v1776852020347!5m2!1sen!2sin"
+              className="w-full h-[300px] sm:h-[380px] lg:h-[450px] rounded-xl border-0"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Prasad Engineering Location Map"
+            />
+          </div>
+        </div>
+      </section>
     </>
   );
 }
-
