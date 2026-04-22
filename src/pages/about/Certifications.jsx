@@ -1,6 +1,25 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import PageHero from "../../components/ui/PageHero";
 import { Award, ShieldCheck, ClipboardCheck, CheckCircle2 } from "lucide-react";
+import { TextEffect } from "../../components/ui/text-effect";
+import aluminium_banner1 from "../../assets/aluminium_banner1.jpg";
+
+function ReplayTextEffect({ children, ...props }) {
+  const ref = useRef(null);
+  const [runKey, setRunKey] = useState(0);
+  const isInView = useInView(ref, { once: false, amount: 0.55, margin: "-10% 0px -10% 0px" });
+  useEffect(() => { if (isInView) setRunKey((k) => k + 1); }, [isInView]);
+  return (
+    <span ref={ref} className="block">
+      {isInView ? (
+        <TextEffect key={runKey} {...props} trigger>{children}</TextEffect>
+      ) : (
+        <span className={props.className} style={{ opacity: 0 }} aria-hidden="true">{children}</span>
+      )}
+    </span>
+  );
+}
 
 const certs = [
   {
@@ -51,10 +70,11 @@ export default function Certifications() {
         tag="Certifications"
         title="Quality & Certifications"
         subtitle="Our commitment to quality is backed by internationally recognised certifications and rigorous process controls."
+        backgroundImage={aluminium_banner1}
       />
 
       {/* ── Cert cards ───────────────────────────── */}
-      <section className="relative bg-surface overflow-hidden">
+      <section className="relative bg-white overflow-hidden section-transition">
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
           style={{
@@ -65,6 +85,22 @@ export default function Certifications() {
         />
 
         <div className="container-max section-padding py-20 lg:py-28 relative z-10">
+
+          {/* Section heading */}
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-steel-900">
+              Built on
+              <ReplayTextEffect
+                as="span"
+                per="word"
+                preset="slide"
+                delay={0.18}
+                className="block text-brand-600"
+              >
+                Certified Quality
+              </ReplayTextEffect>
+            </h2>
+          </div>
 
           {/* Badge highlight row */}
           <motion.div
@@ -78,7 +114,7 @@ export default function Certifications() {
               <span
                 key={b}
                 className="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider
-                           bg-brand-500/10 border border-brand-500/25 text-brand-300 uppercase"
+                           bg-brand-100 border border-brand-200 text-brand-700 uppercase"
               >
                 {b}
               </span>
@@ -95,7 +131,7 @@ export default function Certifications() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
                 className="group relative flex flex-col rounded-2xl overflow-hidden
-                           border border-white/[0.08] bg-surface-2
+                           border border-steel-200/90 bg-white
                            hover:border-brand-500/30 transition-all duration-300"
               >
                 {/* Accent bar */}
@@ -109,22 +145,22 @@ export default function Certifications() {
                       <Icon size={22} className="text-brand-400" strokeWidth={1.75} />
                     </div>
                     <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold
-                                     tracking-widest uppercase bg-brand-500/10
-                                     border border-brand-500/20 text-brand-400">
+                                     tracking-widest uppercase bg-brand-100
+                                     border border-brand-200 text-brand-700">
                       {badge}
                     </span>
                   </div>
 
-                  <h3 className="font-display font-bold text-[17px] text-white leading-snug">
+                  <h3 className="font-display font-bold text-[17px] text-steel-900 leading-snug">
                     {title}
                   </h3>
 
-                  <p className="text-steel-400 text-[13px] leading-relaxed">{desc}</p>
+                  <p className="text-steel-700 text-[13px] leading-relaxed">{desc}</p>
 
                   {/* Points */}
                   <ul className="space-y-2 mt-auto pt-2 border-t border-white/[0.05]">
                     {points.map((p) => (
-                      <li key={p} className="flex items-start gap-2.5 text-[13px] text-steel-400">
+                      <li key={p} className="flex items-start gap-2.5 text-[13px] text-steel-700">
                         <CheckCircle2 size={13} className="text-brand-500 mt-0.5 shrink-0" />
                         {p}
                       </li>
@@ -141,7 +177,7 @@ export default function Certifications() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-10 text-center text-[13px] text-steel-500"
+            className="mt-10 text-center text-[13px] text-steel-700"
           >
             Certificate documentation available on request.{" "}
             <a href="/contact" className="text-brand-400 hover:text-brand-300 transition-colors">

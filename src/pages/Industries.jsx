@@ -1,61 +1,97 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Car, Droplets, Zap, Tractor, Factory, Settings2, ArrowRight
+  ArrowRight,
+  Car,
+  Droplets,
+  Factory,
+  Settings2,
+  Tractor,
+  Zap,
 } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
+import { TextEffect } from "../components/ui/text-effect";
+import banner6 from "../assets/banner6.jpg";
+
+function ReplayTextEffect({ children, ...props }) {
+  const ref = useRef(null);
+  const [runKey, setRunKey] = useState(0);
+  const isInView = useInView(ref, { once: false, amount: 0.55, margin: "-10% 0px -10% 0px" });
+  useEffect(() => { if (isInView) setRunKey((k) => k + 1); }, [isInView]);
+  return (
+    <span ref={ref} className="block">
+      {isInView ? (
+        <TextEffect key={runKey} {...props} trigger>{children}</TextEffect>
+      ) : (
+        <span className={props.className} style={{ opacity: 0 }} aria-hidden="true">{children}</span>
+      )}
+    </span>
+  );
+}
 
 const industries = [
   {
     Icon: Car,
     title: "Automotive Industry",
-    desc: "Precision aluminium castings for engine blocks, transmission housings, brackets, and structural components requiring strict dimensional tolerances.",
-    products: ["Engine components", "Gearbox housings", "Brackets & mounts", "Suspension parts"],
-    delay: 0,
+    image: "/src/assets/automotive.jpg",
+    tag: "Automotive",
+    desc: "Precision aluminium components for automotive applications requiring durability and performance.",
+    products: ["Engine components", "Gearbox housings", "Brackets and mounts", "Suspension parts"],
   },
   {
     Icon: Droplets,
     title: "Pump Manufacturing",
-    desc: "Pump casings, impellers, volutes, and bearing housings cast in high-strength aluminium alloys for water, chemical, and industrial fluid applications.",
+    image: "/src/assets/pump.png",
+    tag: "Fluid Systems",
+    desc: "Corrosion-resistant castings for pump housings, impellers, and fluid handling systems.",
     products: ["Pump casings", "Impellers", "Volutes", "Bearing housings"],
-    delay: 0.07,
   },
   {
     Icon: Zap,
     title: "Electrical Components",
-    desc: "Motor housings, terminal boxes, junction enclosures, and heat sinks manufactured to exacting standards for the electrical and electronics sector.",
+    image: "/src/assets/electrical.jpg",
+    tag: "Electrical",
+    desc: "Dimensionally accurate housings and enclosures for electrical and switchgear applications.",
     products: ["Motor housings", "Terminal boxes", "Junction enclosures", "Heat sinks"],
-    delay: 0.14,
   },
   {
     Icon: Tractor,
     title: "Agricultural Machinery",
-    desc: "Durable aluminium and rubber components for tractors, irrigation systems, and agricultural equipment operating in demanding field conditions.",
+    image: "/src/assets/agri.png",
+    tag: "Agri-Tech",
+    desc: "Robust castings engineered for heavy-duty agricultural equipment and field machinery.",
     products: ["Tractor components", "Irrigation fittings", "Gearbox parts", "Linkage brackets"],
-    delay: 0.21,
   },
   {
     Icon: Factory,
     title: "Industrial Equipment",
-    desc: "Robust castings for compressors, valves, gearboxes, hydraulic systems, and general industrial equipment across varied manufacturing sectors.",
+    image: "/src/assets/industry_equipments.png",
+    tag: "Heavy Industry",
+    desc: "High-strength components for a wide range of industrial machinery and equipment.",
     products: ["Compressor parts", "Valve bodies", "Gearbox housings", "Hydraulic components"],
-    delay: 0.28,
   },
   {
     Icon: Settings2,
     title: "Mechanical Engineering",
-    desc: "Custom-engineered aluminium and rubber parts for general mechanical applications, tooling components, and specialised engineering assemblies.",
+    image: "/src/assets/mechanical_tools.png",
+    tag: "Engineering",
+    desc: "Custom engineered parts for mechanical assemblies, jigs, fixtures, and tooling.",
     products: ["Custom components", "Tooling parts", "Engineering assemblies", "Prototypes"],
-    delay: 0.35,
   },
 ];
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
-});
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.09 },
+  },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+};
 
 export default function Industries() {
   return (
@@ -63,97 +99,136 @@ export default function Industries() {
       <PageHero
         tag="Industries"
         title="Industries We Serve"
-        subtitle="916+ companies across 6 key industries trust Prasad Engineering for precision aluminium and rubber components."
+        subtitle="916+ companies across key sectors trust Prasad Engineering for precision aluminium and rubber components."
+        backgroundImage={banner6}
       />
 
-      {/* ── Industry cards ────────────────────────── */}
-      <section className="relative bg-surface overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-25"
+      <section className="relative bg-white overflow-hidden section-transition">
+        <div
+          className="absolute inset-0 pointer-events-none opacity-25"
           style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px)",
-            backgroundSize: "60px 60px",
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px)",
+            backgroundSize: "52px 52px",
           }}
         />
-        <div className="absolute top-1/2 right-0 w-[600px] h-[600px] rounded-full
-                        bg-brand-700/10 blur-3xl pointer-events-none translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute top-1/2 right-0 h-[540px] w-[540px] rounded-full bg-brand-200/40 blur-3xl pointer-events-none translate-x-1/2 -translate-y-1/2" />
 
-        <div className="container-max section-padding py-20 lg:py-28 relative z-10">
-
-          {/* Header */}
-          <motion.div {...fadeUp(0)} className="max-w-2xl mx-auto text-center mb-14">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold
-                             tracking-widest uppercase text-brand-400 mb-3">
-              <span className="w-6 h-[1.5px] bg-brand-400 rounded-full" />
+        <div className="section-shell">
+          <div className="mx-auto max-w-3xl text-center mb-12">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-brand-400 mb-3">
+              <span className="h-[1.5px] w-6 rounded-full bg-brand-400" />
               Sector Coverage
-              <span className="w-6 h-[1.5px] bg-brand-400 rounded-full" />
+              <span className="h-[1.5px] w-6 rounded-full bg-brand-400" />
             </span>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
-              Built for Many,{" "}
-              <span className="text-gradient">Trusted by All</span>
-            </h2>
-          </motion.div>
-
-          {/* Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {industries.map(({ Icon, title, desc, products, delay }) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative flex flex-col gap-5 p-7 rounded-2xl
-                           bg-surface-2 border border-white/[0.07]
-                           hover:border-brand-500/30 hover:bg-surface-3
-                           transition-all duration-300"
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-steel-900">
+              <ReplayTextEffect
+                as="span"
+                per="word"
+                preset="slide"
+                delay={0.15}
+                className="text-steel-900"
               >
-                {/* Top hover accent */}
-                <div className="absolute top-0 inset-x-0 h-[2px] rounded-t-2xl
+                Built for Many, Trusted by All
+              </ReplayTextEffect>
+            </h2>
+          </div>
+
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {industries.map(({ Icon, title, image, tag, desc, products }) => (
+              <motion.article
+                key={title}
+                variants={cardVariant}
+                whileHover={{ y: -8, transition: { duration: 0.25, ease: "easeOut" } }}
+                className="group relative overflow-hidden rounded-2xl border border-steel-200 bg-white
+                           shadow-sm hover:shadow-xl hover:shadow-brand-200/50
+                           hover:border-brand-400/40 transition-shadow duration-300 cursor-default"
+              >
+                {/* Top border glow on hover */}
+                <div className="absolute top-0 inset-x-0 h-[2px] rounded-t-2xl z-10
                                 bg-gradient-to-r from-brand-500/0 via-brand-500 to-brand-500/0
                                 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Icon */}
-                <div className="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20
-                                flex items-center justify-center
-                                group-hover:bg-brand-500/20 group-hover:border-brand-500/40
-                                transition-all duration-300">
-                  <Icon size={22} className="text-brand-400" strokeWidth={1.75} />
+                {/* Image */}
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <motion.img
+                    src={image}
+                    alt={`${title} manufacturing`}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    whileHover={{ scale: 1.06 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                  />
+                  {/* Gradient overlay — deepens on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f2940]/65 via-[#0f2940]/15 to-transparent
+                                  group-hover:from-[#0f2940]/80 group-hover:via-[#0f2940]/30 transition-all duration-400" />
+
+                  {/* Tag badge */}
+                  <span className="absolute top-3 left-3 inline-flex rounded-full bg-white/90 px-3 py-1
+                                   text-[10px] font-bold uppercase tracking-wider text-brand-700
+                                   group-hover:bg-white transition-colors duration-200">
+                    {tag}
+                  </span>
+
+
                 </div>
 
-                {/* Text */}
-                <div>
-                  <h3 className="font-display font-bold text-[16px] text-white mb-2">{title}</h3>
-                  <p className="text-[13px] text-steel-400 leading-relaxed">{desc}</p>
-                </div>
+                {/* Card body */}
+                <div className="p-5">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-brand-200
+                                 bg-brand-50 text-brand-600 group-hover:bg-brand-500 group-hover:border-brand-500
+                                 group-hover:text-white transition-all duration-300">
+                    <Icon size={18} strokeWidth={1.9} />
+                  </div>
+                    <h3 className="font-display font-bold text-[15px] sm:text-base text-steel-900
+                                   group-hover:text-brand-700 transition-colors duration-200">
+                      {title}
+                    </h3>
+                  </div>
 
-                {/* Product tags */}
-                <div className="flex flex-wrap gap-1.5 mt-auto pt-4 border-t border-white/[0.05]">
-                  {products.map((p) => (
-                    <span key={p}
-                      className="px-2.5 py-1 rounded-md text-[11px] font-medium
-                                 bg-white/5 border border-white/[0.07] text-steel-400">
-                      {p}
-                    </span>
-                  ))}
+                  <p className="text-[13px] text-steel-700 leading-relaxed">{desc}</p>
+
+                  <div className="mt-4 flex flex-wrap gap-1.5 pt-4 border-t border-steel-100">
+                    {products.map((product, i) => (
+                      <motion.span
+                        key={product}
+                        initial={{ opacity: 0, scale: 0.85 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: 0.05 + i * 0.05 }}
+                        className="rounded-md border border-brand-100 bg-brand-50 px-2.5 py-1
+                                   text-[11px] font-medium text-brand-700
+                                   group-hover:border-brand-300 group-hover:bg-brand-100
+                                   transition-colors duration-200"
+                      >
+                        {product}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
 
-          {/* CTA */}
-          <motion.div {...fadeUp(0.4)} className="flex justify-center mt-12">
+          <div className="mt-12 flex justify-center">
             <Link
               to="/contact"
               id="industries-cta"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl
-                         bg-brand-600 hover:bg-brand-500 text-white font-semibold text-sm
-                         transition-colors duration-200 shadow-lg shadow-brand-900/30 group"
+              className="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-7 py-3.5
+                         text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-500
+                         shadow-lg shadow-brand-900/20 group"
             >
               Discuss Your Industry Requirements
-              <ArrowRight size={15}
-                className="group-hover:translate-x-1 transition-transform duration-200" />
+              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

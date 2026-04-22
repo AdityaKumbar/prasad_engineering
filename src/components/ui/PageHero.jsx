@@ -1,19 +1,40 @@
 import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
+import DotGrid from "./DotGrid";
+import banner3 from "../../assets/banner3.jpg";
 
-export default function PageHero({ title, subtitle, tag, className }) {
+export default function PageHero({ title, subtitle, tag, className, backgroundImage }) {
+  const heroImage = backgroundImage || banner3;
+
   return (
     <section
       className={cn(
-        "relative flex items-center min-h-[40vh] overflow-hidden",
-        "bg-gradient-to-br from-surface via-surface-2 to-steel-900",
-        "bg-grid-pattern bg-grid-pattern",
+        "relative flex items-center min-h-[46vh] overflow-hidden bg-[#307db5]",
         className
       )}
     >
-      {/* Gradient orb */}
-      <div className="absolute top-0 left-1/3 w-96 h-96 rounded-full
-                      bg-brand-600/20 blur-3xl pointer-events-none" />
+      {/* Background image */}
+      <img
+        src={heroImage}
+        alt="Background banner"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <DotGrid
+          dotSize={4}
+          gap={5}
+          baseColor="#555555"
+          activeColor="#2b2929"
+          proximity={50}
+          shockRadius={120}
+          shockStrength={2}
+          resistance={1000}
+          returnDuration={1.4}
+        />
+      </div>
+
+      <div className="absolute inset-0 bg-gradient-to-br from-[#2d74a8]/20 via-transparent to-[#214f74]/25 pointer-events-none" />
 
       <div className="container-max section-padding w-full py-20 relative z-10">
         {tag && (
@@ -22,7 +43,7 @@ export default function PageHero({ title, subtitle, tag, className }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             className="inline-block mb-3 px-3 py-1 rounded-full text-xs font-semibold
-                       tracking-widest uppercase bg-brand-500/15 text-brand-300 border border-brand-500/30"
+                       tracking-widest uppercase bg-white/10 text-white border border-white/30"
           >
             {tag}
           </motion.span>
@@ -40,7 +61,7 @@ export default function PageHero({ title, subtitle, tag, className }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-4 max-w-2xl text-lg text-steel-300"
+            className="mt-4 max-w-2xl text-lg text-white/85"
           >
             {subtitle}
           </motion.p>

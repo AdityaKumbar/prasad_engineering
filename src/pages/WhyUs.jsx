@@ -6,12 +6,13 @@ import {
 } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import CountUp from "../components/ui/CountUp";
+import whyUsBanner from "../assets/banner5.jpg";
 
 const reasons = [
   {
     Icon: Clock,
     title: "35+ Years of Industry Experience",
-    desc: "Founded in 1989, Prasad Engineering has built deep expertise across aluminium casting technologies through decades of consistent, hands-on manufacturing.",
+    desc: "Founded as Prasad Patterns in 1987 and re-established as Prasad Engineering in 1994, we have built deep expertise across aluminium casting technologies through decades of consistent, hands-on manufacturing.",
     delay: 0,
   },
   {
@@ -65,10 +66,10 @@ const reasons = [
 ];
 
 const stats = [
-  { to: 35,  suffix: "+", label: "Years Experience"   },
-  { to: 916, suffix: "+", label: "Companies Served"   },
-  { to: 64,  suffix: "+", label: "Alloys Capability"  },
-  { to: 49,  suffix: "+", label: "Skilled Engineers"  },
+  { to: 35, suffix: "+", label: "Years Experience" },
+  { to: 916, suffix: "+", label: "Companies Served" },
+  { to: 64, suffix: "+", label: "Alloys Capability" },
+  { to: 49, suffix: "+", label: "Skilled Engineers" },
 ];
 
 const fadeUp = (delay = 0) => ({
@@ -84,11 +85,12 @@ export default function WhyUs() {
       <PageHero
         tag="Why Choose Us"
         title="The Prasad Engineering Difference"
-        subtitle="Nine reasons why leading companies across India continue to trust Prasad Engineering for their precision component needs."
+        subtitle="Reasons why leading companies across India continue to trust Prasad Engineering for their precision component needs."
+        backgroundImage={whyUsBanner}
       />
 
       {/* ── Stats strip ──────────────────────────── */}
-      <section className="bg-surface-3 border-y border-white/[0.06]">
+      <section className="bg-[#307db5] border-y border-white/[0.10] section-transition">
         <div className="container-max section-padding py-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/[0.08]">
             {stats.map(({ to, suffix, label }, i) => (
@@ -103,7 +105,7 @@ export default function WhyUs() {
                 <div className="text-4xl font-display font-bold text-white">
                   <CountUp to={to} suffix={suffix} />
                 </div>
-                <p className="text-sm text-steel-400 mt-1">{label}</p>
+                <p className="text-sm text-white/80 mt-1">{label}</p>
               </motion.div>
             ))}
           </div>
@@ -111,7 +113,7 @@ export default function WhyUs() {
       </section>
 
       {/* ── Reasons grid ─────────────────────────── */}
-      <section className="relative bg-surface overflow-hidden">
+      <section className="relative bg-white overflow-hidden section-transition">
         <div className="absolute inset-0 pointer-events-none opacity-25"
           style={{
             backgroundImage: "linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px)",
@@ -119,7 +121,7 @@ export default function WhyUs() {
           }}
         />
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full
-                        bg-brand-800/20 blur-3xl pointer-events-none translate-x-1/3 translate-y-1/3" />
+                        bg-brand-200/50 blur-3xl pointer-events-none translate-x-1/3 translate-y-1/3" />
 
         <div className="container-max section-padding py-20 lg:py-28 relative z-10">
 
@@ -132,8 +134,8 @@ export default function WhyUs() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
                 className="group relative flex gap-5 p-6 rounded-2xl
-                           bg-surface-2 border border-white/[0.07]
-                           hover:border-brand-500/30 hover:bg-surface-3
+                           bg-white border border-steel-200/90
+                           hover:border-brand-300/60 hover:shadow-lg hover:shadow-brand-100/70
                            transition-all duration-300"
               >
                 <div className="absolute top-0 inset-x-0 h-[1.5px] rounded-t-2xl
@@ -146,11 +148,11 @@ export default function WhyUs() {
                   <Icon size={20} className="text-brand-400" strokeWidth={1.75} />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-[15px] text-white mb-1.5
-                                 group-hover:text-brand-100 transition-colors duration-200">
+                  <h3 className="font-display font-bold text-[15px] text-steel-900 mb-1.5
+                                 group-hover:text-brand-700 transition-colors duration-200">
                     {title}
                   </h3>
-                  <p className="text-[13px] text-steel-400 leading-relaxed">{desc}</p>
+                  <p className="text-[13px] text-steel-700 leading-relaxed">{desc}</p>
                 </div>
               </motion.div>
             ))}

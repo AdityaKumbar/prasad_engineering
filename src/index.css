@@ -122,6 +122,29 @@
   background: linear-gradient(90deg, rgba(148, 163, 184, 0), rgba(148, 163, 184, 0.28), rgba(148, 163, 184, 0));
 }
 
+.logo-gradient-animated {
+  background-size: 200% 100%;
+  animation: logoGradientShift 4s ease-in-out infinite;
+}
+
+@keyframes logoGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-gradient-animated {
+    animation: none;
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0f1923; }

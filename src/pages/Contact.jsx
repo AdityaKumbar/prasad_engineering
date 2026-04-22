@@ -20,7 +20,15 @@ const contactInfo = [
     Icon: Mail,
     label: "Email",
     value: "prasad.engineering@rediffmail.com",
+    value2: "prasad.engineering.15official@gmail.com",
     sub: "We respond within 24 hours",
+  },
+  {
+    Icon: null,
+    label: "GSTIN",
+    value: "29AACFP1265C2ZH",
+    sub: "GST Identification Number",
+    isGstin: true,
   },
   {
     Icon: Clock,
@@ -69,7 +77,7 @@ export default function Contact() {
       />
 
       {/* â”€â”€ Info tiles + Form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-      <section className="relative bg-surface overflow-hidden">
+      <section className="relative bg-white overflow-hidden section-transition">
         <div className="absolute inset-0 pointer-events-none opacity-25"
           style={{
             backgroundImage: "linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px)",
@@ -77,7 +85,7 @@ export default function Contact() {
           }}
         />
         <div className="absolute top-0 left-0 w-96 h-96 rounded-full
-                        bg-brand-700/15 blur-3xl pointer-events-none -translate-x-1/2 -translate-y-1/3" />
+                        bg-brand-200/60 blur-3xl pointer-events-none -translate-x-1/2 -translate-y-1/3" />
 
         <div className="container-max section-padding py-20 lg:py-28 relative z-10">
           <div className="grid lg:grid-cols-2 gap-14">
@@ -85,35 +93,33 @@ export default function Contact() {
             {/* LEFT â€” Info tiles */}
             <div className="space-y-4">
               <motion.div {...fadeUp(0)}>
-                <h2 className="text-3xl font-display font-bold text-white mb-2">
+                <h2 className="text-3xl font-display font-bold text-steel-900 mb-2">
                   Contact Information
                 </h2>
-                <p className="text-steel-400 text-[15px]">
+                <p className="text-steel-700 text-[15px]">
                   Reach us through any of the channels below.
                 </p>
               </motion.div>
 
-              {contactInfo.map(({ Icon, label, value, sub }, i) => (
+              {contactInfo.map(({ Icon, label, value, value2, sub, isGstin }, i) => (
                 <motion.div
                   key={label}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
-                  className="flex items-start gap-4 p-5 rounded-2xl
-                             bg-surface-2 border border-white/[0.07]
-                             hover:border-brand-500/25 transition-colors duration-200"
+                  className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-steel-200/90 hover:border-brand-500/25 transition-colors duration-200"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20
-                                  flex items-center justify-center shrink-0">
-                    <Icon size={18} className="text-brand-400" strokeWidth={1.75} />
+                  <div className={isGstin ? "w-10 h-10 rounded-xl bg-steel-100 border border-steel-200 flex items-center justify-center shrink-0 text-steel-500 font-bold text-[10px]" : "w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center shrink-0"}>
+                    {isGstin ? "GST" : Icon && <Icon size={18} className="text-brand-400" strokeWidth={1.75} />}
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-[11px] text-steel-500 uppercase tracking-widest font-semibold mb-0.5">
                       {label}
                     </p>
-                    <p className="text-[15px] font-semibold text-white">{value}</p>
-                    <p className="text-[12px] text-steel-500 mt-0.5">{sub}</p>
+                    <p className="text-[15px] font-semibold text-steel-900 break-all">{value}</p>
+                    {value2 && <p className="text-[14px] font-semibold text-steel-900 break-all mt-0.5">{value2}</p>}
+                    <p className="text-[12px] text-steel-600 mt-0.5">{sub}</p>
                   </div>
                 </motion.div>
               ))}
@@ -123,12 +129,12 @@ export default function Contact() {
             <motion.div {...fadeUp(0.1)}>
               {submitted ? (
                 <div className="h-full flex flex-col items-center justify-center gap-4
-                                rounded-2xl border border-brand-500/30 bg-brand-500/5 p-12 text-center">
+                                rounded-2xl border border-brand-300/60 bg-brand-50 p-12 text-center">
                   <CheckCircle2 size={48} className="text-brand-400" strokeWidth={1.5} />
-                  <h3 className="font-display font-bold text-2xl text-white">
+                  <h3 className="font-display font-bold text-2xl text-steel-900">
                     Message Sent!
                   </h3>
-                  <p className="text-steel-400 text-[15px]">
+                  <p className="text-steel-700 text-[15px]">
                     Thank you for reaching out. Our team will respond within 24 hours.
                   </p>
                 </div>
@@ -136,12 +142,12 @@ export default function Contact() {
                 <form
                   id="contact-form"
                   onSubmit={handleSubmit}
-                  className="rounded-2xl border border-white/[0.08] bg-surface-2 p-8 space-y-5"
+                  className="rounded-2xl border border-steel-200/90 bg-white p-8 space-y-5 shadow-sm"
                 >
-                  <h3 className="font-display font-bold text-xl text-white mb-1">
+                  <h3 className="font-display font-bold text-xl text-steel-900 mb-1">
                     Send a Message
                   </h3>
-                  <p className="text-steel-400 text-[13px] pb-2">
+                  <p className="text-steel-700 text-[13px] pb-2">
                     Fill out the form and we'll be in touch shortly.
                   </p>
 
@@ -157,10 +163,10 @@ export default function Contact() {
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                         placeholder="Your name"
-                        className={`w-full px-4 py-2.5 rounded-xl bg-surface border text-white
-                                    text-[14px] placeholder:text-steel-600 outline-none
+                        className={`w-full px-4 py-2.5 rounded-xl bg-white border text-steel-900
+                                    text-[14px] placeholder:text-steel-500 outline-none
                                     focus:border-brand-500 transition-colors duration-200
-                                    ${errors.name ? "border-red-500/60" : "border-white/[0.08]"}`}
+                                    ${errors.name ? "border-red-500/60" : "border-steel-300"}`}
                       />
                       {errors.name && (
                         <p className="text-[11px] text-red-400 mt-1">{errors.name}</p>
@@ -176,8 +182,8 @@ export default function Contact() {
                         value={form.company}
                         onChange={(e) => setForm({ ...form, company: e.target.value })}
                         placeholder="Your company"
-                        className="w-full px-4 py-2.5 rounded-xl bg-surface border border-white/[0.08]
-                                   text-white text-[14px] placeholder:text-steel-600 outline-none
+                        className="w-full px-4 py-2.5 rounded-xl bg-white border border-steel-300
+                                   text-steel-900 text-[14px] placeholder:text-steel-500 outline-none
                                    focus:border-brand-500 transition-colors duration-200"
                       />
                     </div>
@@ -195,10 +201,10 @@ export default function Contact() {
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         placeholder="you@company.com"
-                        className={`w-full px-4 py-2.5 rounded-xl bg-surface border text-white
-                                    text-[14px] placeholder:text-steel-600 outline-none
+                        className={`w-full px-4 py-2.5 rounded-xl bg-white border text-steel-900
+                                    text-[14px] placeholder:text-steel-500 outline-none
                                     focus:border-brand-500 transition-colors duration-200
-                                    ${errors.email ? "border-red-500/60" : "border-white/[0.08]"}`}
+                                    ${errors.email ? "border-red-500/60" : "border-steel-300"}`}
                       />
                       {errors.email && (
                         <p className="text-[11px] text-red-400 mt-1">{errors.email}</p>
@@ -214,8 +220,8 @@ export default function Contact() {
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         placeholder="+91 XXXXX XXXXX"
-                        className="w-full px-4 py-2.5 rounded-xl bg-surface border border-white/[0.08]
-                                   text-white text-[14px] placeholder:text-steel-600 outline-none
+                        className="w-full px-4 py-2.5 rounded-xl bg-white border border-steel-300
+                                   text-steel-900 text-[14px] placeholder:text-steel-500 outline-none
                                    focus:border-brand-500 transition-colors duration-200"
                       />
                     </div>
@@ -232,10 +238,10 @@ export default function Contact() {
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Describe your requirement, material, quantity, or any questions..."
-                      className={`w-full px-4 py-2.5 rounded-xl bg-surface border text-white
-                                  text-[14px] placeholder:text-steel-600 outline-none resize-none
+                      className={`w-full px-4 py-2.5 rounded-xl bg-white border text-steel-900
+                                  text-[14px] placeholder:text-steel-500 outline-none resize-none
                                   focus:border-brand-500 transition-colors duration-200
-                                  ${errors.message ? "border-red-500/60" : "border-white/[0.08]"}`}
+                                  ${errors.message ? "border-red-500/60" : "border-steel-300"}`}
                     />
                     {errors.message && (
                       <p className="text-[11px] text-red-400 mt-1">{errors.message}</p>

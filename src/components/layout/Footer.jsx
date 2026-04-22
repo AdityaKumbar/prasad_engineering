@@ -71,7 +71,17 @@ export default function Footer() {
                   prasad.engineering@rediffmail.com
                 </a>
               </li>
+              <li>
+                <a
+                  href="mailto:prasad.engineering.15official@gmail.com"
+                  className="flex items-center gap-2 text-sm text-steel-400 hover:text-brand-400 transition-colors"
+                >
+                  <Mail size={15} className="text-brand-400" />
+                  prasad.engineering.15official@gmail.com
+                </a>
+              </li>
             </ul>
+            <p className="text-xs text-steel-500 mt-1">GSTIN: 29AACFP1265C2ZH</p>
             <div className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 rounded-full border border-brand-500/30 bg-brand-500/10 text-xs text-brand-300">
               <Shield size={13} />
               ISO Certified Manufacturer

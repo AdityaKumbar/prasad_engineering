@@ -1,0 +1,16 @@
+.split-parent {
+  contain: layout style paint;
+}
+
+.split-line {
+  display: block;
+  overflow: hidden;
+}
+
+.split-word,
+.split-char {
+  display: inline-block;
+  opacity: 1;
+  color: inherit;
+  will-change: transform, opacity;
+}
